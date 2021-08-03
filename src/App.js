@@ -25,7 +25,7 @@ const App = () => {
         </Header>
         <Content>
           <Switch>
-            <Route path="/" exact={true} component={Home}/>
+            <Route path="/proyecto-peliculas" exact={true} component={Home}/>
             <Route path="/newMovies" exact={true} component={NewMovies}/>
             <Route path="/popular" exact={true} component={Popular}/>
             <Route path="/search" exact={true} component={Search}/>

@@ -18,7 +18,7 @@ const MenuTop = () => {
         // style={{ backgroundColor: "#0F7173" }}
       >
         <Menu.Item key="1">
-          <Link to="/">Home</Link>
+          <Link to="/proyecto-peliculas">Home</Link>
         </Menu.Item>
         <Menu.Item key="2">
           <Link to="/new-movies">New Movies</Link>
