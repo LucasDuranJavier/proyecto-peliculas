@@ -1,36 +1,65 @@
-import React from 'react';
-import { Col, Card, Icon } from 'antd'
-import { Link } from 'react-router-dom'
+import "./MovieCatalogo.sass";
+import { useState, useEffect } from "react";
+import { Card } from "antd";
+import { PlayCircleOutlined } from "@ant-design/icons";
+import { Pagination } from "antd";
+import Loading from "../Loading";
+import { Link } from "react-router-dom";
+const { Meta } = Card;
 
-// import './MovieCatalogo.sass'
+const MovieCatalogo = ({ url }) => {
+  const [page, setPage] = useState(1);
+  const [movies, setMovies] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
 
-export default (props) => {
-    console.log(props);
-  const { movies:{ results } } = props
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const urlWithPagination = `${url}&page=${page}`;
+      const response = await fetch(urlWithPagination);
+      const moviesObj = await response.json();
+      setTotalPages(moviesObj.total_pages);
+      setMovies(moviesObj.results);
+    };
+    fetchMovies();
+  }, [page, url]);
 
-  return results.map(movie=>(
-    <Col key={movie.id} xs={4} className="movie-catalogo">
-      <MovieCard movie={movie} />
-    </Col>
-  ))
-}
+  const handlePageClick = (page) => {
+    setPage(page);
+  };
 
-
-const MovieCard = (props) => {
-  const { movie: { id, title, poster_path } } = props
-  const { Meta } = Card
-  const posterPath = `https://image.tmdb.org/t/p/original/${poster_path}`
-
+  if (movies === undefined) {
+    return <Loading />;
+  }
   return (
-  <Link to= {`/movie/${id}`} >
+    <section className="cards-section">
+      {movies.map((movie) => (
+        <MovieCard movie={movie} key={movie.id} />
+      ))}
+      <div className="paginator">
+        <Pagination
+          onChange={handlePageClick}
+          currentPage={page}
+          total={totalPages}
+          hideOnSinglePage={true}
+        />
+        <br />
+      </div>
+    </section>
+  );
+};
+
+const MovieCard = ({ movie: { id, title, poster_path } }) => (
+  <Link to={`/movie/${id}`}>
     <Card
       hoverable
-      style={{ width: 230 }}
-      cover={ <img alt={title} src={posterPath } /> }
-      actions={[ <Icon type="eye"  key="eye"/> ]}
+      style={{ width: 240 }}
+      className="card"
+      cover={<img alt="example" src={`https://image.tmdb.org/t/p/original${poster_path}`} />}
+      actions={[<PlayCircleOutlined className="__icon" key="plus" />]}
     >
       <Meta title={title} />
     </Card>
   </Link>
-  )
-}
+);
+
+export default MovieCatalogo;

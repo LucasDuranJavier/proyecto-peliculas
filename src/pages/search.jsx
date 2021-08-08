@@ -1,57 +1,38 @@
-// import React, {useState, useEffect} from 'react';
-// import { Row, Col, Input } from 'antd'
-// import { withRouter } from 'react-router-dom'
-// import queryString from 'query-string'
-// import MovieCatalogo from '../../Components/MovieCatalogo'
-// // import Footer from '../../Components/Footer'
-// import {URL_API, API_KEY} from '../utils/constants';
+import "./helperStyles.sass";
+import { useState, useEffect } from "react";
+import MovieCatalogo from "../components/MovieCatalogo/MovieCatalogo";
+import { URL_API, API_KEY } from "../utils/constants";
+import { Input, Typography } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+const { Title } = Typography;
 
-// import './search.sass'
+const Search = () => {
+  const [currentSearch, setCurrentSearch] = useState("");
+  const [url, setUrl] = useState("");
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (currentSearch !== "") {
+        setUrl(`${URL_API}/search/movie${API_KEY}&languaje=es-ES&query=${currentSearch}`);
+      }
+    }, 2000);
+  }, [currentSearch]);
 
-// const Search =  (props) => {
-//   const {location, history} = props
-//   const [movieList, setMovieList] = useState([]) 
-//   const [searchValue, setSeacrhValue] = useState("")
+  const handlerOnChange = (input) => setCurrentSearch(input.target.value);
 
-//   useEffect(() => {
-//     (async()=>{
-//       const searchValue = queryString.parseUrl(location.search)
-//       const { s } = searchValue.query
-//       const response = await fetch(
-//         `${URL_API}/search/movie?api_key=${API_KEY}&languaje=es-ES&query=${s}&page=1`
-//       )
-//       const movies = await response.json()
-//       setSeacrhValue(s)
-//       setMovieList(movies)
-//     })()
-//   }, [location.search]);
+  return (
+    <div className="page">
+      <Title className="__title">Busca una película</Title>
+      <Input
+        prefix={<SearchOutlined />}
+        placeholder="Ingresá el nombre"
+        onChange={handlerOnChange}
+        className="input-search"
+        size="large"
+      />
+      <MovieCatalogo url={url} />
+    </div>
+  );
+};
 
-//   const onChangeSeacrh = e => {
-//     const urlParam = queryString.parse(location.search)
-//     urlParam.s = e.target.value
-//     history.push(`?${queryString.stringify(urlParam)}`)
-//     setSeacrhValue(e.target.value)
-//   }
-
-// return (
-//   <Row>
-//     <Col span={12} offset={6} className="search">
-//       <h1>Busca tu Pelicula</h1>
-//       <Input value={searchValue} onChange={onChangeSeacrh} />
-//     </Col>
-//     {movieList.results && (
-//       <Row>
-//         <Col span={24}>
-//           <MovieCatalogo movies= {movieList} />
-//         </Col>
-//       </Row>
-//     )}
-//     <Col span={24}>
-//       <Footer />
-//     </Col>
-//   </Row>
-// )
-// }
-
-// export default withRouter(Search)
+export default Search;

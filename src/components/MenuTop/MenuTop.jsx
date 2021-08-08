@@ -1,21 +1,19 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Menu} from 'antd';
-//  import { ReactComponent as Logo} from '../../assets/movies-react';
+import logo from '../../assets/popcorn.png'
 import "./MenuTop.sass"
 
 
 const MenuTop = () => {
     return (
         <div className="menu-top">
-      {/* <div className="menu-top__logo"> */}
-        {/* <div className="logo2"></div> */}
-      {/* </div> */}
+           <div className="menu-top__logo">
+              <img className="menu-top__img" src={logo} alt="popcorn" />
+          </div>
       <Menu
-        theme="dark"
+        // theme="dark"
         mode="horizontal"
-        // defaultSelectedKeys={["2"]}
-        // style={{ backgroundColor: "#0F7173" }}
       >
         <Menu.Item key="1">
           <Link to="/proyecto-peliculas">Home</Link>
