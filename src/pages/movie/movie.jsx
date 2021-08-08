@@ -1,12 +1,8 @@
-
-// Imports from dependencies
 import { useParams } from "react-router-dom";
 import { Col, Row, Button, Layout } from "antd";
 import moment from "moment";
 import { useState } from "react";
 import { PlaySquareOutlined } from "@ant-design/icons";
-
-// Internal imports
 import useFetch from "../../hooks/useFetch";
 import "./movie.sass";
 import Loading from "../../components/Loading";

@@ -5,6 +5,8 @@ import logo from '../../assets/popcorn.png'
 import "./MenuTop.sass"
 
 
+
+
 const MenuTop = () => {
     return (
         <div className="menu-top">
@@ -12,7 +14,6 @@ const MenuTop = () => {
               <img className="menu-top__img" src={logo} alt="popcorn" />
           </div>
       <Menu
-        // theme="dark"
         mode="horizontal"
       >
         <Menu.Item key="1">

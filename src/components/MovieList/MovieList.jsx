@@ -1,8 +1,6 @@
 import "./MovieList.sass";
 import Loading from "../Loading";
 import { IMAGE_PATH } from "../../utils/constants";
-
-
 import { Link } from "react-router-dom";
 import { List, Avatar, Button } from "antd";
 import { PlayCircleOutlined } from '@ant-design/icons';

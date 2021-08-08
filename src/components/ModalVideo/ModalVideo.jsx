@@ -1,10 +1,6 @@
-// Imports from dependencies
 import { useState, useEffect } from "react";
 import { Modal } from "antd";
-// https://cookpete.com/react-player/ to modify the react-player
 import ReactPlayer from "react-player";
-
-// Internal Imports
 import "./ModalVideo.sass";
 
 const ModalVideo = ({ videoKey, videoPlatform, isOpen, close }) => {
