@@ -14,7 +14,7 @@ const Footer = () => {
 
   <Footer className="footer">
     <Divider />
-    <p> By Gabriela Duran </p>
+    <p> By Gabriela Dura </p>
     <div className="contact">
     <a href="https://github.com/Mandisa-94" target="_blanck" className= "gitHub">
      
